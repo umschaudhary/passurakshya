@@ -54,7 +54,8 @@ def user():
     dict = startup()
     print(colored("\t1.Save Username and password", "yellow"))
     print(colored("\t2.Retrieve password", "yellow"))
-    print(colored("\t3.Exit", "yellow"))
+    print(colored("\t3.Update Password", "yellow"))
+    print(colored("\t4.Exit ", "yellow"))
     print(colored("===================================", "blue"))
     print(colored("===================================", "blue"))
     choice = int(input(colored(" Enter your choice : ", "yellow")).strip())
@@ -85,14 +86,17 @@ def user():
             else:
                 print(colored("\n\n=======================", "blue"))
                 print(colored("1. Retrieve Your Password", "yellow"))
-                print(colored("2. Exit ", "yellow"))
+                print(colored("2. Update password ", "yellow"))
+                print(colored("3. Exit ", "yellow"))
                 print(colored("\n=======================", "blue"))
 
                 xchoice = input(colored("\n Your Choice : ", "yellow"))
                 if int(xchoice) == 1:
                     choice = 2
+                if int(xchoice) == 2:
+                    choice = 3
 
-                elif int(xchoice) == 2:
+                elif int(xchoice) == 3:
                     print(colored(" !! Thank you !!\n ", "green"))
                     exit()
 
@@ -113,6 +117,33 @@ def user():
 
             if input(colored(" Retrive Another Password (y/n) :  ", "yellow")).lower() == "y":
                 choice = 2
+            else:
+                user()
+
+        elif choice == 3:
+            dict = get_directory()
+            ask = input(colored(" Enter username : ", "yellow")).strip()
+            while ask not in dict:
+                print (colored("Username Not Found !", "red"))
+                ask = input(colored("Enter Username : ", "yellow")).strip()
+            passs = dict[ask]
+            opassword = getpass(prompt='Enter old password : ')
+            while opassword != passs:
+                print(colored('***Password doesnot matched*** :', 'red'))
+                opassword = getpass(prompt='Enter old password : ').strip()
+            npass = getpass(prompt='Enter new password : ').strip()
+            while npass == "":
+                print(colored("Password can't be Empty :", "red"))
+                npass = getpass(prompt='Enter new password : ').strip()
+            cpass=getpass(prompt='Confirm Password :').strip()
+            while cpass != npass:
+                print(colored("**Password doesn't Matched **", "red"))
+                npass = getpass(prompt='Enter new Password : ').strip()
+                cpass = getpass(prompt='Confirm Password : ').strip()
+            save(ask, npass)
+
+            if input(colored(" Update Another Password (y/n) :  ", "yellow")).lower() == "y":
+                choice = 3
             else:
                 user()
 
