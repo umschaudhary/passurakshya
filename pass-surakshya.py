@@ -64,9 +64,14 @@ def user():
     while True:
         if choice == 1:
 
-            username = input(" Enter username : ").strip()
+            username = input(colored(" Enter username : ","yellow").strip())
             while username == "":
-                username = input(" UserName Required : ").strip()
+                username = input(colored(" UserName Required : ","red").strip())
+            while username in dict:
+            	print(colored("***Username exits*** ","red"))
+            	username = input(colored(" Enter username : ","yellow").strip())
+            	
+            
 
             password = getpass(prompt=' Enter Password :').strip()
             while password == "":
@@ -74,52 +79,54 @@ def user():
             cpassword=getpass(prompt=' Confirm Password : ').strip()
 
             while password!=cpassword:
-                print("** Password Donot matched ***")
+                print(colored("** Password Donot matched ***","red"))
                 password = getpass(prompt=' Enter Password : ').strip()
                 cpassword=getpass(prompt=' Confirm Password : ').strip()
                 
 
             
             dict = save(username, password)
-
-            while input(" Save Another one (y/n): ").lower() == 'y':
+            print(colored("Username and Password saved ","green"))
+            while input(colored(" Save Another one (y/n): ","yellow")).lower() == 'y':
                 break
             else:
-                print("\n\n=======================")
-                print("1. Retrieve Your Password")
-                print("2. Exit ")
-                print("\n=======================")
+                print(colored("\n\n=======================","blue"))
+                print(colored("1. Retrieve Your Password","yellow"))
+                print(colored("2. Exit ","yellow"))
+                print(colored("\n=======================","blue"))
 
-                xchoice = input("\n Your Choice : ")
+                xchoice = input(colored("\n Your Choice : ","yellow"))
                 if int(xchoice) == 1:
                     choice = 2
 
                 elif int(xchoice) == 2:
-                    print("\n Thank you !! ")
+                    print(colored(" !! Thank you !!\n ","green"))
                     exit()
 
         elif choice == 2:
             dict = get_directory()
-            ask = input(" Enter username : ").strip()
+            ask = input(colored(" Enter username : ","yellow")).strip()
             while ask not in dict:
-                ask = input(" Username Not Found !\n Enter Username : ").strip()
+            	print (colored( "Username Not Found !","red"))
+            	ask = input(colored("Enter Username : ","yellow")).strip()
 
             passs = dict[ask]
-            print(" Password For : %s : copied to clipboard . " % (ask))
-            print(" You Can Paste using 'ctrl+v' Where You Want :) ")
+            print(colored(" Password For : %s : copied to clipboard . " % ask,"green"))
+            print(colored(" You Can Paste using 'ctrl+v' Where You Want","green"))
             try:
                 pc.copy(passs)
             except Exception:
                 print(Exception)
             
                 
-            if input(" Retrive Another Password (y/n) :  ").lower() == "y":
+            if input(colored(" Retrive Another Password (y/n) :  ","yellow")).lower() == "y":
                 choice = 2
             else:
                 user()
 
         else:
-            exit()
+        	print(colored("!!!Thank you !!!\n","green"))
+        	exit()
 
 
 user()
