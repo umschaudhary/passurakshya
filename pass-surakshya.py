@@ -5,6 +5,8 @@ from datetime import date
 from datetime import time
 from datetime import datetime
 import pyperclip as pc
+from getpass import getpass
+from termcolor import colored
 
 
 dict = {}
@@ -49,48 +51,69 @@ def startup():
 
 
 def user():
-    print("Current Date and Time is :%s" % today)
+    print(colored("===================================","blue"))
+    print(colored("===================================","blue"))
+    print(colored(" Date and Time is :%s" % today,"green"))
     dict = startup()
-    print("1.Save Username and password")
-    print("2.Retrieve password")
-    print("3.Exit")
-    choice = int(input("enter your choice : ").strip())
+    print(colored("\t1.Save Username and password","yellow"))
+    print(colored("\t2.Retrieve password","yellow"))
+    print(colored("\t3.Exit","yellow"))
+    print(colored("===================================","blue"))
+    print(colored("===================================","blue"))
+    choice = int(input(colored(" Enter your choice : ","yellow")).strip())
     while True:
         if choice == 1:
 
-            username = input("enter username : ").strip()
-            password = input("enter password : ").strip()
-            dict[username] = password
+            username = input(" Enter username : ").strip()
+            while username == "":
+                username = input(" UserName Required : ").strip()
 
+            password = getpass(prompt=' Enter Password :').strip()
+            while password == "":
+                password = getpass(prompt=' Password Required: ').strip()
+            cpassword=getpass(prompt=' Confirm Password : ').strip()
+
+            while password!=cpassword:
+                print("** Password Donot matched ***")
+                password = getpass(prompt=' Enter Password : ').strip()
+                cpassword=getpass(prompt=' Confirm Password : ').strip()
+                
+
+            
             dict = save(username, password)
 
-            while input("do you want to continue").lower() == 'y':
+            while input(" Save Another one (y/n): ").lower() == 'y':
                 break
             else:
+                print("\n\n=======================")
+                print("1. Retrieve Your Password")
+                print("2. Exit ")
+                print("\n=======================")
 
-                xchoice = input("\n1. Retrieve Your Password  \n2. Exit \nChoice : ")
+                xchoice = input("\n Your Choice : ")
                 if int(xchoice) == 1:
                     choice = 2
 
                 elif int(xchoice) == 2:
-                    print("Thanks you ")
+                    print("\n Thank you !! ")
                     exit()
 
         elif choice == 2:
             dict = get_directory()
-            ask = input("enter username : ").strip()
+            ask = input(" Enter username : ").strip()
             while ask not in dict:
-                ask = input("Username Incorrect enter username again : ").strip()
+                ask = input(" Username Not Found !\n Enter Username : ").strip()
 
             passs = dict[ask]
-            print("Your password is : %s"%(passs))
+            print(" Password For : %s : copied to clipboard . " % (ask))
+            print(" You Can Paste using 'ctrl+v' Where You Want :) ")
             try:
                 pc.copy(passs)
             except Exception:
                 print(Exception)
             
                 
-            if input("enter y to retrive another password :  ").lower() == "y":
+            if input(" Retrive Another Password (y/n) :  ").lower() == "y":
                 choice = 2
             else:
                 user()
