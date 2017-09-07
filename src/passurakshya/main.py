@@ -157,5 +157,9 @@ def user():
             print(colored(" ============================\n", "green"))
             exit()
 
+def main():
+    user()
 
-user()
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,11 @@
+setup.cfg
+setup.py
+passurakshya.egg-info/PKG-INFO
+passurakshya.egg-info/SOURCES.txt
+passurakshya.egg-info/dependency_links.txt
+passurakshya.egg-info/requires.txt
+passurakshya.egg-info/top_level.txt
+src/pass
+src/passurakshya/__init__.py
+src/passurakshya/__main__.py
+src/passurakshya/main.py

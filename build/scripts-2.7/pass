@@ -1,0 +1,5 @@
+#!python
+
+if __name__ == '__main__':
+    from pasurakshya.main import main
+    main()
