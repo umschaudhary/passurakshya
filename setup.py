@@ -11,10 +11,10 @@ setup(name='passurakshya',
       author='Umesh Chaudhary',
       author_email='umesschaudhary@gmail.com',
       url='https://github.com/umschaudhary/passurakshya',
-      scripts=['src/pass'],
+      scripts=['src/passurakshya'],
       install_requires=requirements,
-      packages=['passurakshya'],
-      package_dir = {'passurakshya': 'src/passurakshya'},
+      packages=['pasurakshya'],
+      package_dir = {'passurakshya': 'src/pasurakshya'},
       classifiers=['Environment :: Console',
                'Programming Language :: Python :: 3' ]
       
